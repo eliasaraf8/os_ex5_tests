@@ -39,6 +39,7 @@ def test_hostname():
                   num_proc=5, program_path=Path("/bin/hostname"), program_args=[])
 
     assert res.returncode == 0
+    assert res.stderr == ""
     assert res.stdout.strip() == "testHostName"
 
 def test_program_args():
@@ -46,6 +47,7 @@ def test_program_args():
                   num_proc=5, program_path=Path("/bin/bash"), program_args=[ "--help"])
 
     assert res.returncode == 0
+    assert res.stderr == ""
     assert "GNU bash, version" in res.stdout
 
 def test_max_processes():
@@ -58,26 +60,28 @@ def test_max_processes():
 def test_proc_mounted():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
                         num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["-c", "findmnt"], valgrind=True)
+                        program_args=["-c", "findmnt"])
 
     assert res.returncode == 0
+    assert res.stderr == ""
     assert "/proc" in res.stdout
 
 def test_proc_unmounted():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
                         num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["ls"], valgrind=True)
+                        program_args=[])
 
-    res2 = subprocess.run(["findmnt", "|", "grep", "/image/proc"], stdin=subprocess.PIPE,
-                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=60)
+    res2 = subprocess.run(["findmnt | grep /image/proc"], stdin=subprocess.PIPE,
+                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True, timeout=60, shell=True)
 
     assert res.returncode == 0
+    assert res.stderr == ""
     assert res2.stdout == ""
 
 def test_changed_hostname():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
                         num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["-c", "hostname"], valgrind=True)
+                        program_args=["-c", "hostname"])
 
     assert res.returncode == 0
     assert "testHostName" in res.stdout
