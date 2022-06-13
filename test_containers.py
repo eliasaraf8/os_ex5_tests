@@ -59,8 +59,8 @@ def test_max_processes():
 
 def test_proc_mounted():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
-                        num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["-c", "findmnt"])
+                        num_proc=10, program_path=Path("/bin/findmnt"),
+                        program_args=[])
 
     assert res.returncode == 0
     assert res.stderr == ""
@@ -80,16 +80,16 @@ def test_proc_unmounted():
 
 def test_changed_hostname():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
-                        num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["-c", "hostname"])
+                        num_proc=10, program_path=Path("/bin/hostname"),
+                        program_args=[])
 
     assert res.returncode == 0
     assert "testHostName" in res.stdout
 
 def test_valgrind_happy_flow():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
-                        num_proc=10, program_path=Path("/bin/bash"),
-                        program_args=["-c", "sleep 3"], valgrind=True)
+                        num_proc=10, program_path=Path("/bin/sleep"),
+                        program_args=["3"], valgrind=True)
 
     assert res.returncode == 0
     assert "0 bytes in 0 blocks" in res.stderr
