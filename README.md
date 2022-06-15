@@ -2,17 +2,15 @@
 
 ## Requirements
 
-These tests should work in Linux systems including the Aquarium, and on Windows with WSL2.
-In addition, your system must have `python3` installed.
+These tests should work in Linux systems including the school's VM (though not tested there), and on Windows with WSL2.
+In addition, your system must have `python3` and `pip` installed.
 
-I haven't tested them on Mac or with normal Windows, and I have no idea if they work there. If you're having problems and you're sure you followed
-the instructions, try them on the Aquarium.
-
-## Installation instructions
+## Instructions
 
 ### Before running the tests: 
-   * Make sure your *container* binary is named `container`, and is placed at the parent directory of the curret one. That is, make sure it's placed inside the project's root directory.
+   * Make sure your *container* binary is named `container`, and is placed at the parent directory of the current one. That is, make sure it's placed inside the project's root directory.
    * Make sure your *image* directory is named `image` and is placed at the project's root directory as well.
+   * Make sure you have root privileges on the system you're operating, as the container requires it to be able to run.
 
 <br />
 
