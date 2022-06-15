@@ -78,14 +78,6 @@ def test_proc_unmounted():
     assert res.stderr == ""
     assert res2.stdout == ""
 
-def test_changed_hostname():
-    res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
-                        num_proc=10, program_path=Path("/bin/hostname"),
-                        program_args=[])
-
-    assert res.returncode == 0
-    assert "testHostName" in res.stdout
-
 def test_valgrind_happy_flow():
     res = run_container(new_hostname="testHostName", image_dir=IMAGE_DIR,
                         num_proc=10, program_path=Path("/bin/sleep"),
