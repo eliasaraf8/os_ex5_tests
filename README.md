@@ -3,7 +3,7 @@
 ## Requirements
 
 These tests should work in Linux systems including the school's VM (though not tested there), and on Windows with WSL2.
-In addition, your system must have `python3` and `pip` installed.
+In addition, your system must have `python3` and `pip3` installed.
 
 ## Instructions
 
@@ -18,7 +18,7 @@ In addition, your system must have `python3` and `pip` installed.
 
 2. `cd tests`
 
-3. `pip install -r requirements.txt` (You're encouraged to run it within a virtual environment)
+3. `pip3 install -r requirements.txt` (You're encouraged to run it within a virtual environment)
 
 4. Run the test suite: `sudo -E python3 -m pytest test_containers.py` 
 
