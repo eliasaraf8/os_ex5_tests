@@ -6,7 +6,7 @@ from typing import List
 
 CONTAINER_EXE = Path(__file__).parent.parent / "container"  # {$PROJECT_ROOT_DIR}/container
 
-IMAGE_DIR = Path(__file__).parent.parent / "image"  # {$PROJECT_ROOT_DIR}/image
+IMAGE_DIR = Path("image")  # {$PROJECT_ROOT_DIR}/image
 
 if not CONTAINER_EXE.exists():
     print(f"Expected container executable at path {CONTAINER_EXE}", file=sys.stderr)
